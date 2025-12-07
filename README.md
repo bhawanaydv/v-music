@@ -1,70 +1,197 @@
-# Getting Started with Create React App
+# V-Music - Full Stack Music Application 🎵
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A beautiful music streaming and playlist management application built with React, Node.js, Express, and MongoDB.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **User Authentication**: Secure login and signup with JWT tokens
+- **Music Search**: Search for tracks using Spotify API
+- **Trending Songs**: View top 20 trending songs on homepage
+- **Favorites**: Like and save your favorite tracks
+- **Playlists**: Create, update, and delete custom playlists
+- **Audio Playback**: Preview tracks directly in the app
+- **Responsive Design**: Beautiful UI that works on all devices
 
-### `npm start`
+## 📁 Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+v-music/
+├── frontend/                # React Frontend Application
+│   ├── public/
+│   ├── src/
+│   │   ├── context/
+│   │   │   └── AuthContext.js    # Auth state management
+│   │   ├── pages/
+│   │   │   ├── Login.js          # Login page
+│   │   │   ├── Signup.js         # Signup page
+│   │   │   ├── Home.js           # Main app page
+│   │   │   ├── Auth.css          # Auth pages styles
+│   │   │   └── Home.css          # Home page styles
+│   │   ├── App.js                # Main React component
+│   │   └── App.css               # Global styles
+│   └── package.json
+│
+├── backend/                 # Node.js Backend API
+│   ├── config/
+│   │   └── db.js            # MongoDB connection
+│   ├── middleware/
+│   │   └── auth.js          # JWT authentication
+│   ├── models/
+│   │   └── User.js          # User model
+│   ├── routes/
+│   │   ├── auth.js          # Auth routes
+│   │   └── user.js          # User routes
+│   ├── .env                 # Environment variables
+│   ├── index.js             # Server entry point
+│   └── package.json
+│
+├── package.json             # Root package.json (run both servers)
+└── README.md
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Setup Instructions
 
-### `npm test`
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- MongoDB Atlas account (or local MongoDB)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Quick Start (Run Both Servers)
 
-### `npm run build`
+1. Install root dependencies:
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install all dependencies (frontend + backend):
+```bash
+npm run install-all
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Run both servers:
+```bash
+npm run dev
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Manual Setup
 
-### `npm run eject`
+#### Backend Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Navigate to backend folder:
+```bash
+cd backend
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Install dependencies:
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Configure environment variables in `.env`:
+```
+PORT=5001
+MONGODB_URL=mongodb+srv://bhawana2024_db_user:bhawanamusicproject@musicproject.dnd0zv7.mongodb.net/?appName=MusicProject
+JWT_SECRET=v-music-super-secret-jwt-key-2024
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. Start the server:
+```bash
+npm run dev
+```
 
-## Learn More
+The API will be running at `http://localhost:5001`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Frontend Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Navigate to frontend folder:
+```bash
+cd frontend
+```
 
-### Code Splitting
+2. Install dependencies:
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. Start the React app:
+```bash
+npm start
+```
 
-### Analyzing the Bundle Size
+The app will be running at `http://localhost:3000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📡 API Endpoints
 
-### Making a Progressive Web App
+### Authentication
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | Login user |
+| GET | `/api/auth/me` | Get current user |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### User Features
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/user/favorites` | Get all favorites |
+| POST | `/api/user/favorites` | Add to favorites |
+| DELETE | `/api/user/favorites/:trackId` | Remove from favorites |
+| GET | `/api/user/playlists` | Get all playlists |
+| POST | `/api/user/playlists` | Create playlist |
+| PUT | `/api/user/playlists/:id` | Update playlist |
+| DELETE | `/api/user/playlists/:id` | Delete playlist |
+| POST | `/api/user/playlists/:id/tracks` | Add track to playlist |
+| DELETE | `/api/user/playlists/:id/tracks/:trackId` | Remove track |
 
-### Advanced Configuration
+## 🎨 Tech Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Frontend:**
+- React 19
+- React Router DOM
+- Axios
+- CSS (Glassmorphism Design)
 
-### Deployment
+**Backend:**
+- Node.js
+- Express.js
+- MongoDB with Mongoose
+- JWT Authentication
+- bcryptjs for password hashing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🔐 Environment Variables
 
-### `npm run build` fails to minify
+| Variable | Description |
+|----------|-------------|
+| `PORT` | Server port (default: 5001) |
+| `MONGODB_URL` | MongoDB connection string |
+| `JWT_SECRET` | Secret key for JWT tokens |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🚀 NPM Scripts
+
+### Root Directory
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Run both frontend and backend |
+| `npm run frontend` | Run only frontend |
+| `npm run backend` | Run only backend |
+| `npm run install-all` | Install all dependencies |
+
+### Frontend
+| Script | Description |
+|--------|-------------|
+| `npm start` | Start development server |
+| `npm run build` | Build for production |
+
+### Backend
+| Script | Description |
+|--------|-------------|
+| `npm start` | Start production server |
+| `npm run dev` | Start with nodemon (hot reload) |
+
+## 📝 License
+
+MIT License - feel free to use this project for learning and personal use.
+
+---
+
+Made with ❤️ by Bhawana
+# melody_project
